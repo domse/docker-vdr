@@ -15,26 +15,37 @@ from  ubuntu:12.04
 # don't ask for stupid things
 env   DEBIAN_FRONTEND noninteractive
 
+#update the system
+run		apt-get -y update && apt-get -y upgrade
 #install dependencies
-run	  apt-get --yes install python-software-properties
+run	  apt-get -y install python-software-properties
 
-run   apt-add-repository ppa:yavdr/stable-vdr
+
+# adding yavdr specific stuff
+run   apt-add-repository -y ppa:yavdr/main
+run   apt-add-repository -y ppa:yavdr/stable-vdr
+run   apt-add-repository -y ppa:yavdr/stable-yavdr
+run   apt-add-repository -y ppa:yavdr/stable-xbmc
 
 #update the system
-run		apt-get --yes update; apt-get --yes upgrade
+run		apt-get -y update && apt-get -y upgrade
 
-run   apt-get -y install vdr vdr-streamdev-server vdr-plugin-vnsiserver vdr-plugin-xvdr vdr-plugin-live
+# install vdr stuff
+#run   apt-get -y install vdr vdr-streamdev-server vdr-plugin-vnsiserver vdr-plugin-xvdr vdr-plugin-live
+run apt-get -y install dvb-driver-sundtek-mediaclient 
+run apt-get -y install yavdr-utils yavdr-base yavdr-essential
 
 # add config files
 
 add    ./supervisor/supervisord.conf /etc/supervisor/supervisord.conf
 add    ./supervisor/conf.d/vdr.conf /etc/supervisor/conf.d/vdr.conf
+add    ./supervisor/conf.d/tntnet.conf /etc/supervisor/tntnet.d/vdr.conf
 add    ./scripts/start /start
 
 # modify permissions
-run	   chmod +x /start
+run chmod +x /start
 
-# 80 is for nginx web, /data contains static files and database /start runs it.
-# expose 25565 have to have a look what is wanted
-# volume ["/data"]
+
+# Start supervisor-init-System
+# here we need to make sure that the whole yavdr stuff is reflected
 cmd    ["/start"]
