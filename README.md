@@ -4,3 +4,16 @@ docker-vdr
 Basic headless VDR Server based on Docker and yavdr
 
 THIS IS NOT READY TO USE AND UNUSABLE!
+======================================
+
+To play build the image, run it, log into it with docker-bash or nsenter. CHange the order.conf according to our needs and start vdr manually (service vdr start).
+
+Keep in mind to minimally export 8008 (live) and 3000 (streamdev).
+
+My commands:
+
+docker build --rm=true -t "jondalar/docker-yavdr-headless" .
+docker run -d --name="yavdr" -p 80:80 -p 22:10022 -p 8008:8008 jondalar/docker-yavdr-headless
+docker-bash yavdr
+
+
