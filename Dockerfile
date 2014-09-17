@@ -10,7 +10,7 @@
 # -----------------------------------------------------------------------------
 
 # Base system is the precise LTS version of Ubuntu.
-from  ubuntu:12.04
+from  phusion/baseimage:12.04
 
 # don't ask for stupid things
 env   DEBIAN_FRONTEND noninteractive
