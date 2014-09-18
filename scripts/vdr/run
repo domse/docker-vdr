@@ -2,6 +2,7 @@
 # -----------------------------------------------------------------------------
 # docker-yavdr start script
 # written by Jonadalar
+# modified by domse
 #
 # based on: Isaac Bythewood
 # -----------------------------------------------------------------------------
@@ -13,6 +14,6 @@ then
   touch /etc/yavdr/postinstall-started
 fi
 
-# Run supervisor which maintains the further init process
+# Run vdr
 vdr
 
