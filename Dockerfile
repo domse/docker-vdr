@@ -63,8 +63,20 @@ EXPOSE 8008
 # /var/lib/vdr
 # /etc/vdr
 
-#ADD ./scripts/start /etc/my_init.d/start.sh
-#RUN chmod +x /etc/my_init.d/start.sh
+#add configfiles
+ADD ./vdrconfig/conf.d/ /etc/vdr/conf.d/
+ADD ./vdrconfig/conf.d/ /etc/vdr/conf.aval/
+
+#Add runscript for vdr
+RUN mkdir /etc/service/vdr/
+ADD ./scripts/vdr/run /etc/service/vdr/run
+RUN chmod +x /etc/service/vdr/run
+
+#add runscript for tntnet / yavdr webinterface
+RUN mkdir /etc/service/tntnet/
+ADD ./scripts/tntnet/run /etc/service/tntnet/run
+RUN chmod +x /etc/service/tntnet/run
+
 
 # Use baseimage-docker's init system
 CMD ["/sbin/my_init"]

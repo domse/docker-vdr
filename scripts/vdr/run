@@ -14,5 +14,5 @@ then
 fi
 
 # Run supervisor which maintains the further init process
-/usr/bin/supervisord
+vdr
 
