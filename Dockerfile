@@ -20,7 +20,8 @@ RUN echo APT::Install-Recommends "0"; >> /etc/apt/apt.conf
 RUN echo APT::Install-Suggests "0"; >> /etc/apt/apt.conf 
 
 #update the system
-run apt-get -y update && apt-get -y upgrade
+RUN apt-get -y update && apt-get -y upgrade && dpkg-divert --local --rename --add /sbin/initctl && \
+    ln -sf /bin/true /sbin/initctl
 
 # adding yavdr specific stuff
 run   apt-add-repository -y ppa:yavdr/unstable-main
@@ -36,12 +37,12 @@ RUN apt-get -y update && apt-get -y upgrade
 
 
 # install vdr stuff
-#RUN apt-get -y install gdebi
-RUN apt-get -y install acpid anacron at avahi-daemon bash-completion build-essential cpufrequtils dvb-driver-sundtek-mediaclient ethtool ssh eventlircd hsetroot i965-va-driver ir-keytable irserver libpam-ck-connector linux-firmware linux-firmware-nonfree linux-firmware-yavdr lirc logrotate mhddfs nvram-wakeup pm-utils ubuntu-extras-keyring udisks-glue update-manager-core ureadahead usbutils vdr vdr-addon-acpiwakeup vdr-addon-avahi-linker vdr-addon-lifeguard vdr-plugin-avahi4vdr vdr-plugin-channellists vdr-plugin-dbus2vdr vdr-plugin-dummydevice vdr-plugin-dvbsddevice vdr-plugin-dvbhddevice vdr-plugin-dynamite vdr-plugin-epgsearch vdr-plugin-femon vdr-plugin-live vdr-plugin-markad vdr-plugin-menuorg vdr-plugin-pvr350 vdr-plugin-restfulapi vdr-plugin-skinnopacity vdr-plugin-streamdev-server vdr-plugin-wirbelscan vdr-skins-speciallogos vdr-tftng-anthraize vdr-tftng-pearlhd vdr-tftng-standard vdr-xpmlogos vim wakeonlan wget wpasupplicant w-scan xfsprogs yavdr-base yavdr-hostwakeup yavdr-remote yavdr-utils yavdr-webfrontend
+#RUN apt-get -y install acpid anacron at avahi-daemon bash-completion build-essential cpufrequtils dvb-driver-sundtek-mediaclient ethtool ssh eventlircd hsetroot i965-va-driver ir-keytable irserver libpam-ck-connector linux-firmware linux-firmware-nonfree linux-firmware-yavdr lirc logrotate mhddfs nvram-wakeup pm-utils ubuntu-extras-keyring udisks-glue update-manager-core ureadahead usbutils vdr vdr-addon-acpiwakeup vdr-addon-avahi-linker vdr-addon-lifeguard vdr-plugin-avahi4vdr vdr-plugin-channellists vdr-plugin-dbus2vdr vdr-plugin-dummydevice vdr-plugin-dvbsddevice vdr-plugin-dvbhddevice vdr-plugin-dynamite vdr-plugin-epgsearch vdr-plugin-femon vdr-plugin-live vdr-plugin-markad vdr-plugin-menuorg vdr-plugin-pvr350 vdr-plugin-restfulapi vdr-plugin-skinnopacity vdr-plugin-streamdev-server vdr-plugin-wirbelscan vdr-skins-speciallogos vdr-tftng-anthraize vdr-tftng-pearlhd vdr-tftng-standard vdr-xpmlogos vim wakeonlan wget wpasupplicant w-scan xfsprogs yavdr-base yavdr-hostwakeup yavdr-remote yavdr-utils yavdr-webfrontend
+#RUN apt-get -y install at avahi-daemon bash-completion hsetroot logrotate update-manager-core ureadahead vdr vdr-addon-avahi-linker vdr-addon-lifeguard vdr-plugin-avahi4vdr vdr-plugin-channellists vdr-plugin-dbus2vdr vdr-plugin-dummydevice vdr-plugin-dvbsddevice vdr-plugin-dvbhddevice vdr-plugin-dynamite vdr-plugin-epgsearch vdr-plugin-femon vdr-plugin-live vdr-plugin-markad vdr-plugin-menuorg vdr-plugin-pvr350 vdr-plugin-restfulapi vdr-plugin-skinnopacity vdr-plugin-streamdev-server vdr-plugin-wirbelscan vdr-skins-speciallogos vdr-tftng-anthraize vdr-tftng-pearlhd vdr-tftng-standard vdr-xpmlogos vim w-scan yavdr-base yavdr-utils yavdr-webfrontend
 RUN apt-get -y install vlc-nox
 
 #Expose Ports
-EXPOSE 22 
+#EXPOSE 22 
 EXPOSE 80 
 EXPOSE 111 
 EXPOSE 2004 
@@ -60,6 +61,8 @@ EXPOSE 8008
 # /var/lib/vdr
 # /etc/vdr
 
+ADD ./scripts/start /etc/my_init.d/start.sh
+RUN chmod +x /etc/my_init.d/start.sh
 
 # Use baseimage-docker's init system
 CMD ["/sbin/my_init"]
