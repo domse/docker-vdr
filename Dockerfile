@@ -65,7 +65,7 @@ EXPOSE 8008
 
 #add configfiles
 ADD ./vdrconfig/conf.d/ /etc/vdr/conf.d/
-ADD ./vdrconfig/conf.d/ /etc/vdr/conf.aval/
+ADD ./vdrconfig/conf.aval/ /etc/vdr/conf.aval/
 
 #Add runscript for vdr
 RUN mkdir /etc/service/vdr/
