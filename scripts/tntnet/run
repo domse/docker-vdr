@@ -1,2 +1,12 @@
+#!/bin/bash
+# -----------------------------------------------------------------------------
+# docker-yavdr start script | tntnet
+# written by domse
+# 
+#
+# based on: Isaac Bythewood and Jonadalar
+# -----------------------------------------------------------------------------
+
+# initial start of YAVDR init scripts here!
 tntnet
 
