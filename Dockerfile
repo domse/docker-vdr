@@ -43,6 +43,9 @@ RUN apt-get -y install vlc-nox
 #maybe we have to add some of this. Just reordered to have a stable stub above here, to reduce build time
 #RUN apt-get -y install acpid anacron at avahi-daemon bash-completion build-essential cpufrequtils dvb-driver-sundtek-mediaclient ethtool ssh eventlircd hsetroot i965-va-driver ir-keytable irserver libpam-ck-connector linux-firmware linux-firmware-nonfree linux-firmware-yavdr lirc logrotate mhddfs nvram-wakeup pm-utils ubuntu-extras-keyring udisks-glue update-manager-core ureadahead usbutils vdr vdr-addon-acpiwakeup vdr-addon-avahi-linker vdr-addon-lifeguard vdr-plugin-avahi4vdr vdr-plugin-channellists vdr-plugin-dbus2vdr vdr-plugin-dummydevice vdr-plugin-dvbsddevice vdr-plugin-dvbhddevice vdr-plugin-dynamite vdr-plugin-epgsearch vdr-plugin-femon vdr-plugin-live vdr-plugin-markad vdr-plugin-menuorg vdr-plugin-pvr350 vdr-plugin-restfulapi vdr-plugin-skinnopacity vdr-plugin-streamdev-server vdr-plugin-wirbelscan vdr-skins-speciallogos vdr-tftng-anthraize vdr-tftng-pearlhd vdr-tftng-standard vdr-xpmlogos vim wakeonlan wget wpasupplicant w-scan xfsprogs yavdr-base yavdr-hostwakeup yavdr-remote yavdr-utils yavdr-webfrontend
 
+# Clean up APT when done.
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 #Expose Ports
 #EXPOSE 22 
 EXPOSE 80 
@@ -65,7 +68,7 @@ EXPOSE 8008
 
 #add configfiles
 ADD ./vdrconfig/conf.d/ /etc/vdr/conf.d/
-ADD ./vdrconfig/conf.d/ /etc/vdr/conf.aval/
+ADD ./vdrconfig/conf.aval/ /etc/vdr/conf.aval/
 
 #Add runscript for vdr
 RUN mkdir /etc/service/vdr/
@@ -76,6 +79,10 @@ RUN chmod +x /etc/service/vdr/run
 RUN mkdir /etc/service/tntnet/
 ADD ./scripts/tntnet/run /etc/service/tntnet/run
 RUN chmod +x /etc/service/tntnet/run
+
+#make a default user with name dockervdr and Password vdr
+RUN adduser --disabled-password --gecos "" dockervdr
+RUN  echo "dockervdr:vdr"| chpasswd
 
 
 # Use baseimage-docker's init system
