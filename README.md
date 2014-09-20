@@ -14,7 +14,7 @@ My commands:
 
 1. docker build --rm=true -t "jondalar/docker-yavdr-headless" .
 
-2. docker run -d --name="yavdr" -p 80:80 -p 22:10022 -p 8008:8008 jondalar/docker-yavdr-headless
+2. docker run -d --name="yavdr" -p 80:80 -p 10022:22 -p 8008:8008 jondalar/docker-yavdr-headless
 
 3. docker-bash yavdr
 
