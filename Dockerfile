@@ -37,7 +37,7 @@ RUN apt-get -y update && apt-get -y upgrade
 
 
 # install vdr stuff
-RUN apt-get -y install at avahi-daemon bash-completion hsetroot logrotate update-manager-core ureadahead vdr vdr-addon-avahi-linker vdr-addon-lifeguard vdr-plugin-avahi4vdr vdr-plugin-channellists vdr-plugin-dbus2vdr vdr-plugin-dummydevice vdr-plugin-dvbsddevice vdr-plugin-dvbhddevice vdr-plugin-dynamite vdr-plugin-epgsearch vdr-plugin-femon vdr-plugin-live vdr-plugin-markad vdr-plugin-menuorg vdr-plugin-pvr350 vdr-plugin-restfulapi vdr-plugin-skinnopacity vdr-plugin-streamdev-server vdr-plugin-wirbelscan vdr-skins-speciallogos vdr-tftng-anthraize vdr-tftng-pearlhd vdr-tftng-standard vdr-xpmlogos vim w-scan yavdr-base yavdr-utils yavdr-webfrontend
+RUN apt-get -y install at avahi-daemon bash-completion hsetroot logrotate update-manager-core ureadahead vdr-plugin-dummydevice w-scan yavdr-essential-docker-headless
 RUN apt-get -y install vlc-nox
 
 #maybe we have to add some of this. Just reordered to have a stable stub above here, to reduce build time
