@@ -3,7 +3,7 @@ docker-vdr
 
 Basic headless VDR Server based on Docker and yavdr
 
-THIS ALPHA SOFTWARE (or maybe pre) AND MIGHT BE UNUSABLE!
+THIS IS ALPHA SOFTWARE (or maybe pre) AND MIGHT BE UNUSABLE!
 ======================================
 
 To play build the image, run it, log into it with docker-bash or nsenter. Fill the /etc/vdr/conf.d folder with the plugins you need from conf.aval. 
