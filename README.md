@@ -16,11 +16,7 @@ My commands:
 
 1. docker build --rm=true -t "jondalar/docker-yavdr-headless" .
 
-<<<<<<< HEAD
-2. docker run -d --privileged --name="yavdr" -p 80:80 -p 10022:22 -p 8008:8008 -p 34890:34890 jondalar/docker-yavdr-headless
-=======
-2. docker run -d --privileged --name="yavdr" -p 80:80 -p 34890:34890 -p 3000:3000 -p 10022:22 -p 8008:8008 -p 34890:34890 jondalar/docker-yavdr-headless
->>>>>>> testing
+2. docker run -d --privileged --name="yavdr" -p 80:80 -p 3000:3000 -p 10022:22 -p 8008:8008 -p 34890:34890 jondalar/docker-yavdr-headless
 
 3. docker-bash yavdr
 
