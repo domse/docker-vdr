@@ -7,7 +7,7 @@
 # Require: Docker (http://www.docker.io/)
 # -----------------------------------------------------------------------------
 
-FROM ubuntu/baseimage:14.04.3
+FROM ubuntu:14.04.3
 MAINTAINER jondalar <alex@iphonedation.com>
 ENV DEBIAN_FRONTEND noninteractive
 
