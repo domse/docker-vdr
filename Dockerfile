@@ -24,10 +24,10 @@ RUN apt-get -y update && apt-get -y upgrade && dpkg-divert --local --rename --ad
     ln -sf /bin/true /sbin/initctl
 
 # adding yavdr specific stuff
-run   apt-add-repository -y ppa:yavdr/unstable-main
-run   apt-add-repository -y ppa:yavdr/unstable-vdr
-run   apt-add-repository -y ppa:yavdr/unstable-yavdr
-run   apt-add-repository -y ppa:yavdr/unstable-xbmc
+run   add-apt-repository -y ppa:yavdr/main
+run   add-apt-repository -y ppa:yavdr/stable-vdr
+run   add-apt-repository -y ppa:yavdr/stable-yavdr
+run   add-apt-repository -y ppa:yavdr/stable-xbmc
 
 # add mutiverse to sources.list to accomodate markad stuff
 RUN echo "deb http://security.ubuntu.com/ubuntu trusty multiverse" >> /etc/apt/sources.list
