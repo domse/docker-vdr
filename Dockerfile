@@ -24,6 +24,7 @@ RUN apt-get -y update && apt-get -y upgrade && dpkg-divert --local --rename --ad
     ln -sf /bin/true /sbin/initctl
 
 # adding yavdr specific stuff
+run   apt-get -y install add-apt-key
 run   add-apt-repository -y ppa:yavdr/main
 run   add-apt-repository -y ppa:yavdr/stable-vdr
 run   add-apt-repository -y ppa:yavdr/stable-yavdr
